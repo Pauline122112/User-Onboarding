@@ -22,9 +22,11 @@ const { name, value, type, checked } = evt.target
 }
 
 return (
-    <form className='form container' onSubmit={onSubmit}>
-      <div className='form-group submit'>
-        <h2>Add new Lambda User</h2>
+        <form className="form container" onSubmit={onSubmit}>
+            <div className="form-group submit">
+                <div>
+                <h2>Add a User</h2>
+                </div>
 
         <button disabled={disabled}>submit</button>
         
@@ -49,7 +51,8 @@ return (
         </label>
         </div>
 
-           <label>Email
+           <label>
+               Email
           <input
             value={values.email}
             onChange={onChange}

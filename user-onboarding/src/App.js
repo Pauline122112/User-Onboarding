@@ -88,7 +88,7 @@ const formSubmit = () => {
     const newUser = {
     username: formValues.username.trim(),
     email: formValues.email.trim(),
-    terms: formValues.terms.trim(),
+    // terms: formValues.terms.trim(),
     }
     postNewUser(newUser)
 }
