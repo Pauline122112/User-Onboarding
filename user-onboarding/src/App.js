@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
-import { validate } from 'uuid'
-import schema from '../validation/formSchema'
-import UserForm from './Form'
+import schema from './validation/formSchema'
+import UserForm from './components/Form'
+import User from './components/user'
 
 const initialFormValues = {
     username: '',
     email: '',
-    terms: false,
+    terms: '',
 }
 
 const initialFormErrors = {
@@ -33,8 +33,9 @@ export default function App() {
 const getUsers = () => {
     axios.get('https://reqres.in/api/users')
 
-    .then(res => {
-      setUsers(res.data)
+    .then((res) => {
+      setUsers(res.data.data)
+      console.log(`GETUSER IS WORKING`, setUsers)
     })
     .catch(err => {
       debugger
@@ -42,19 +43,17 @@ const getUsers = () => {
     })
 }
 
-const postNewUser = newUser => {
+const postNewUser = (newUser) => {
 axios.post('https://reqres.in/api/users', newUser)
  .then(res => {
       setUsers([ ...users, res.data])
       setFormValues(initialFormValues)
     })
-    .catch(err => {
+    .catch((err) => {
       debugger
       console.log(err)
     })
-    .finally(() => {
-      //this would be a good spot to clean the form
-    })
+    .finally(() => {})
 }
 
 const validate = (name, value) => {
@@ -68,7 +67,7 @@ const validate = (name, value) => {
           [name]: ""
         })
       })
-      .catch(err => {
+      .catch((err) => {
         setFormErrors({
           ...formErrors, 
           [name]: err.errors[0]
@@ -81,7 +80,7 @@ const inputChange = (name, value) => {
  validate(name, value)
     setFormValues({
       ...formValues,
-      [name]: value // NOT AN ARRAY
+      [name]: value, // NOT AN ARRAY
     })
 }
 
@@ -98,6 +97,8 @@ useEffect(() => {
     getUsers()
 }, []);
 
+useEffect(() => {}, [])
+
 useEffect(() => {
     schema.isValid(formValues)
     .then(valid => {
@@ -107,8 +108,24 @@ useEffect(() => {
 
   
 return (
-    <div className='container'>
-        <header><h1>Lambda Sign up</h1></header>
+    <div className='App'>
+        <header>
+          <h1>Lambda Sign up</h1>
+          </header>
+        <UserForm
+        values={formValues}
+        change={inputChange}
+        submit={formSubmit}
+        disabled={disabled}
+        errors={formErrors}
+      />
+      {
+        users.map(user => {
+          return (
+            <User key={user.id} details={user} />
+          )
+        })
+      }
     </div>
 )
 }

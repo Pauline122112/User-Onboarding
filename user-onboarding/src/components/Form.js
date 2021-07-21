@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default UserForm(props) {
+export default function UserForm(props) {
   const {
     values,
     submit,
