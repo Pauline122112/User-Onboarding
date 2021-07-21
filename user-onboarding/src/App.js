@@ -4,6 +4,8 @@ import * as yup from 'yup'
 import schema from './validation/formSchema'
 import UserForm from './components/Form'
 import User from './components/user'
+import './styles.css'
+import './'
 
 const initialFormValues = {
     username: '',
