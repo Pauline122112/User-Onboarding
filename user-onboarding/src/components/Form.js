@@ -39,41 +39,49 @@ return (
       </div>
 
       <div className='form-group inputs'>
-        <h4>General information</h4>
+        <h1>General information</h1>
 
-        <label>Username&nbsp;
+        <label>
+            <h3>Username</h3>&nbsp;
+            <div className='formBar'>
           <input
             value={values.username}
             onChange={onChange}
             name='username'
             type='text'
           />
+          </div>
         </label>
         </div>
 
            <label>
-               Email
+              <h3>Email</h3> 
+               <div className='textEmail'>
           <input
             value={values.email}
             onChange={onChange}
             name='email'
             type='text'
           />
+          </div>
         </label>
 
 
         <div className='form-group checkboxes'>
-        <h4>Terms of Service</h4>
-         <label>Terms
+        <h3>Terms of Service</h3>
+         <label>Accept Terms and conditions:
+        </label>
+        </div>
+             <div className='chkBx'>
           <input
           type='checkbox'
           name='terms'
          
           checked={values.terms}
           onChange={onChange}
-          />    
-        </label>
-        </div>
+
+          />
+          </div>    
     </form>
 )
 }
